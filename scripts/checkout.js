@@ -2,6 +2,14 @@ import { cart,removeFromCart} from "../data/cart.js";
 import { products } from "../data/products.js";
 import { currencyConvert } from "./utils/money.js";
 
+
+const today=dayjs()
+const deliveryDate = today.add(7, "days");
+const formattedDate = deliveryDate.format('dddd, MMMM D');
+console.log(formattedDate);
+
+
+
 let cartSummaryHTML=''
 
 cart.forEach((cartItem)=>{
@@ -14,7 +22,7 @@ cart.forEach((cartItem)=>{
             matchingProduct=product;
 
     })
-    console.log(matchingProduct)
+   
 
    cartSummaryHTML+=` <div class="cart-item-container js-cart-itemContainer-${matchingProduct.id}">
     <div class="delivery-date">
@@ -106,7 +114,7 @@ document.querySelectorAll('.delete-link-js')
     const productId=links.dataset.productId
     removeFromCart(productId)
     const container=document.querySelector(`.js-cart-itemContainer-${productId}`)
-    console.log(container)
+   
     container.remove();
    
   })
